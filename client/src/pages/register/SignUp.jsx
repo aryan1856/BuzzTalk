@@ -1,4 +1,5 @@
 import React from 'react'
+import GenderCheckBox from './genderCheckBox.jsx'
 
 const SignUp = () => {
   return (
@@ -37,7 +38,9 @@ const SignUp = () => {
               <input type="text" placeholder='Confirm Password' className='input input-bordered input-success w-full'/>
             </div>
 
-            <a href="#" className='text-sm hover:underline hover:text-blue-600 mt-2 inline-block pt-2 pb-4 pl-2'>Already Have an Account?</a>
+            <GenderCheckBox />
+
+            <a href="#" className='text-sm hover:underline hover:text-blue-600 mt-2 inline-block pb-4 pl-2'>Already Have an Account?</a>
 
             <div>
               <button className='btn btn-outline btn-success w-full text-base'>Create Account</button>
