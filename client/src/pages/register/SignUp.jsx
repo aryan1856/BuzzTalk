@@ -1,24 +1,28 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import GenderCheckBox from './genderCheckBox.jsx'
+import useRegister from '../../hooks/useRegister'
 
 const SignUp = () => {
 
   const [inputs, setInputs] =  useState({
-    fullName : '',
-    username : '',
-    password : '',
-    confirmPassword : '',
-    gender : ''
+    fullName : "",
+    username : "",
+    password : "",
+    confirmPassword : "",
+    gender : ""
   })
 
   const handleCheckbox = (gender) => {
     setInputs({...inputs, gender})
   }
 
-  const handleSubmit = (e) => {
+  const {loading, register} = useRegister();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(inputs);
+    // console.log(inputs);
+    await register(inputs);
   }
 
   return (
@@ -72,7 +76,9 @@ const SignUp = () => {
             <Link to='/login' className='text-sm hover:underline hover:text-blue-600 mt-2 inline-block pb-4 pl-2'>Already Have an Account?</Link>
 
             <div>
-              <button className='btn btn-outline btn-success w-full text-base'>Create Account</button>
+              <button className='btn btn-outline btn-success w-full text-base'>
+                Create Account
+              </button>
             </div>
 
           </form>

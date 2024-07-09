@@ -78,3 +78,16 @@ export const register = async(request, response) => {
         response.status(500).json({error : "Internal server error"});
     }
 }
+
+export const user = async(request, response) => {
+    try {
+        const {username} = request.body;
+        const user = await User.findOne({username});
+        if(user){
+            return response.status(200).json(user);
+        }
+        response.status(200).json(null);
+    } catch (error) {
+        response.status(400).json(error.message);
+    }
+}
