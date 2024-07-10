@@ -1,10 +1,18 @@
 import React from 'react'
 import { CgLogOut } from "react-icons/cg";
+import useLogout from '../../hooks/useLogout';
 
 const Logout = () => {
+  const {loading, logout} = useLogout();
   return (
     <div className='mt-auto'>
-        <CgLogOut className='w-6 h-6 text-white cursor-pointer'/>
+        {!loading ? (
+            <CgLogOut className='w-6 h-6 text-white cursor-pointer'
+            onClick={logout}
+            />
+        ) : (
+          <span className='loading loading-spinner'></span>
+        )}
     </div>
   )
 }

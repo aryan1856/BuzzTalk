@@ -9,7 +9,7 @@ export const loginUser = async (request, response) => {
         const isPasswordMatched = await bcryptjs.compare(password, user?.password || "");
 
         if(!user | !isPasswordMatched){
-            return response.status(400).json({error : "Invalid username of password"});
+            return response.status(400).json({error : "Invalid username or password"});
         }
 
         generateToken(user._id, response);

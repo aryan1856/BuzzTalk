@@ -1,10 +1,12 @@
 import React from 'react'
 import { useState } from 'react'
 import toast from 'react-hot-toast';
+import { UseAuthContext } from '../context/AuthContext';
 
 
 const useRegister = () => {
   const [loading, setLoading] = useState(false);
+  const {setAuth} = UseAuthContext();
 
   const register = async ({fullName, username, password, confirmPassword, gender}) => {
         const success = handleInputErrors({fullName, username, password, confirmPassword, gender});
@@ -45,6 +47,13 @@ const useRegister = () => {
             });
 
             const data = await response.json();
+            if(data.error){
+                throw new Error(data.error);
+            }
+
+            localStorage.setItem("curr-user", JSON.stringify(data));
+            setAuth(data);
+
             toast.success("Account created successfully");
             toast.success(`Welcome ${data.fullName}`);
         } catch (error) {
