@@ -5,9 +5,10 @@ import userRoutes from "./routes/userRoutes.js"
 import messageRoutes from "./routes/messageRoutes.js"
 import connectDB from './database/connectDB.js';
 import cookieParser from 'cookie-parser';
+import { app, server } from './socket/socket.js';
 // import cors from 'cors';
 
-const app = express();
+
 const PORT = process.env.PORT || 5000;
 // const cors = require('cors');
 
@@ -26,7 +27,7 @@ app.use("/api/auth", auth);
 app.use("/api/messages", messageRoutes);
 app.use("/api/users", userRoutes);
 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
     connectDB();
     console.log(`Server is running on port ${PORT}`);
 });
