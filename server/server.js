@@ -1,4 +1,5 @@
 import express from 'express';
+import path from "path";
 import dotenv from 'dotenv';
 import auth from './routes/auth.js';
 import userRoutes from "./routes/userRoutes.js"
@@ -10,6 +11,8 @@ import { app, server } from './socket/socket.js';
 
 
 const PORT = process.env.PORT || 5000;
+
+const __dirname = path.resolve();
 // const cors = require('cors');
 
 dotenv.config();
@@ -26,6 +29,12 @@ app.use(cookieParser());
 app.use("/api/auth", auth);
 app.use("/api/messages", messageRoutes);
 app.use("/api/users", userRoutes);
+
+app.use(express.static(path.join(__dirname, "/client/dist")))
+
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
+})
 
 server.listen(PORT, () => {
     connectDB();
