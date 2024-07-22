@@ -15,7 +15,7 @@ export const SocketContextProvider = ({children}) => {
 
     useEffect(() => {
         if(auth){ 
-            const socket = io("http://localhost:5000", {
+            const socket = io("https://buzztalk-chat-randomly.onrender.com", {
                 query : {
                     userId : auth._id
                 }
